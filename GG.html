@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #28a745;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Guess the Number</h1>
+        <p>Guess a number between 1 and 100:</p>
+        <input type="text" id="guess" placeholder="Enter your guess">
+        <button onclick="checkGuess()">Submit</button>
+        <div class="result" id="result"></div>
+        <div class="result" id="attempts"></div>
+    </div>
+
+    <script>
+        // Generate a random number between 1 and 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess').value);
+            const resultDiv = document.getElementById('result');
+            const attemptsDiv = document.getElementById('attempts');
+
+            attempts++;
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                resultDiv.textContent = 'Please enter a number between 1 and 100.';
+                return;
+            }
+
+            if (guess === randomNumber) {
+                resultDiv.textContent = `Congratulations! You guessed the number in ${attempts} attempts.`;
+                attemptsDiv.textContent = '';
+            } else if (guess < randomNumber) {
+                resultDiv.textContent = 'Too low! Try again.';
+                attemptsDiv.textContent = `Attempts: ${attempts}`;
+            } else {
+                resultDiv.textContent = 'Too high! Try again.';
+                attemptsDiv.textContent = `Attempts: ${attempts}`;
+            }
+        }
+    </script>
+</body>
+</html>
